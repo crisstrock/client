@@ -23,6 +23,7 @@ import { ProductoComponent } from './producto/producto.component';
 import { CategoriaComponent } from './categoria/categoria.component';
 //Bootstrap Modals
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { PresentacionComponent } from './presentacion/presentacion.component';
 
 //Routes
 const routes: Routes = [
@@ -42,7 +43,8 @@ const routes: Routes = [
     RegisterComponent,
     ProfileComponent,
     ProductoComponent,
-    CategoriaComponent
+    CategoriaComponent,
+    PresentacionComponent
   ],
   imports: [
     BrowserModule,
