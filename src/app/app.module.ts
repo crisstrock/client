@@ -1,9 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+//import { Http } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
+//To use ngModel
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-
+//to import datatables
 import { DataTablesModule } from 'angular-datatables';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
@@ -15,8 +17,12 @@ import { ProfileComponent } from './profile/profile.component';
 
 import { AuthenticationService } from './authentication.service';
 import { AuthGuardService } from './auth-guard.service';
+import { HttpErrorHandlerService } from './http-error-handler.service';
+import { MessageService } from './message.service';
 import { ProductoComponent } from './producto/producto.component';
 import { CategoriaComponent } from './categoria/categoria.component';
+//Bootstrap Modals
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 //Routes
 const routes: Routes = [
@@ -40,14 +46,15 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
+    //HttpModule,
     FormsModule,
     HttpClientModule,
+    NgbModule,
     RouterModule.forRoot(routes),
-    //to import datatables
     DataTablesModule,
     AngularFontAwesomeModule
   ],
-  providers: [AuthenticationService, AuthGuardService],
+  providers: [AuthenticationService, AuthGuardService, HttpErrorHandlerService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
