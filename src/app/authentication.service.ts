@@ -105,7 +105,6 @@ export class AuthenticationService {
     //headers = headers.set('Authorization', 'Basic xzeydyt==');
     return this.http.get('/api/profile', {
       headers: { Authorization: `Bearer  ${this.getToken()}` }
-      //headers: headers
     })
   }
 

@@ -1,0 +1,70 @@
+
+<tr>
+  <td>{{ producto.nombre }}</td>
+  <td>{{ producto.descripcion }}</td>
+  <td *ngIf="producto.categoria_id == 0">Sin categoria</td>
+  <td *ngIf="producto.categoria_id != 0">{{ categoria.nombre }}</td>
+  <td>
+    <button class="btn btn-danger float-right ml-3" (click)="delete()">Delete</button>
+    <button class="btn btn-dark float-right ml-3" routerLink="/presentacion/{{ producto.id }}">Presentaciones</button>
+    <button class="btn btn-success float-right ml-3" (click)="openModalChange(contentChange)">Change</button>
+    <button class="btn btn-info float-right" (click)="open(content)">Edit</button>
+  </td>
+</tr>
+
+<!-- Add Modal -->
+<ng-template #content let-modal>
+        
+        <div class="modal-header">
+          <h4 class="modal-title">Producto Edit</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form (submit)="update(nombreProducto,descripcionProducto)">
+        <div class="modal-body">
+          <div class="form-group">
+            <input #nombreProducto type="text" value="{{ producto.nombre }}" class="form-control" name="nombre"><!-- [(ngModel)]="title"  >-->
+          </div>
+          <div class="form-group">
+            <input #descripcionProducto type="text" value="{{ producto.descripcion }}" class="form-control" name="descripcion"><!-- [(ngModel)]="title"  >-->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Update</button>
+          <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+        </div>
+    </form>
+    
+</ng-template>
+
+<!-- Change Categoria Modal -->
+<ng-template #contentChange let-modal>
+        
+    <div class="modal-header">
+      <h4 class="modal-title">Change Categoria</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form (submit)="changeCategoria($event)">
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="current_categoria">Current Categoria</label>
+        <input type="text" class="form-control" value="{{ categoria.nombre }}" disabled>
+      </div>
+      <div class="form-group">
+        <label for="new_categoria">New Categoria</label>
+          <select [(ngModel)]="categoriaId" [ngModelOptions]="{standalone: true}" class="form-control">
+              <option value="0">Selecciona una categoria</option>
+              <option *ngFor="let cat of categorias" value="{{ cat.id }}">{{ cat.nombre}}</option>
+          </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary">Update</button>
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</form>
+
+</ng-template>

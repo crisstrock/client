@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ViewChild, ElementRef } from '@angular/core';
-
+//Import model
 import { Categoria } from './categoria';
+//import the service
 import { CategoriaService } from './categoria.service';
 
 

@@ -1,6 +1,40 @@
-<br>
-
-<button type="button" class="btn btn-primary btn-small" (click)="showModal()">Agregar nueva categoria</button>
-<div class="container">
-	<table datatable [dtOptions]="dtOptions" class="row-border hover"></table>
+<div class="row">
+  <div class="col">
+    <button (click)="open(content)" class="btn btn-primary btn-block mb-3">Add new Producto</button>
+    <app-producto-list></app-producto-list>
+  </div>
 </div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Add Producto</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form (submit)="add($event)">
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="task">Enter producto name: </label>
+      <input type="text" name="name" id="name" class="form-control"  placeholder="Enter producto name" [(ngModel)]="name" [ngClass]="{'is-invalid' : name == '' && formSubmitted}">
+      <div class="invalid-feedback">Name can't be blank!</div>
+    </div>
+    <div class="form-group">
+      <label for="task">Enter producto description: </label>
+      <input type="text" name="description" id="description" class="form-control"  placeholder="Enter producto description" [(ngModel)]="description" [ngClass]="{'is-invalid' : description == '' && formSubmitted}">
+      <div class="invalid-feedback">Description can't be blank!</div>
+    </div>
+    <div class="form-group">
+      <select [(ngModel)]="categoria_id" [ngModelOptions]="{standalone: true}" class="form-control">
+        <option value="0">Selecciona una categoria</option>
+        <option *ngFor="let categoria of categorias" ngDefaultControl value="{{ categoria.id }}">{{ categoria.nombre }}</option>
+      </select>
+    </div>
+    <input [(ngModel)]="user_id" [ngModelOptions]="{standalone: true}" type="hidden" value="{{ user_id }}"><!-- ngDefaultControl [ngModelOptions]="{standalone: true}">-->
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary">Add producto</button>  
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</form>
+</ng-template>

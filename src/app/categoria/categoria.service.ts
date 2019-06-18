@@ -24,6 +24,18 @@ export class CategoriaService {
       .pipe(catchError(this.handleError('getCategorias', [])))
    }
 
+   //Function to obtain one categoria
+   getCategoriaById(cat_id): Observable<Categoria>{
+    const newCategoria = {
+      id: cat_id,
+      title: 'not set',
+      descripcion: 'not set',
+      categoria_id: null,
+      user_id: null
+    }
+    return this.http.post<Categoria>('api/getonecategoria', newCategoria)
+   }
+
    addCategoria(categoria: Categoria): Observable<Categoria>{
     return this.http
       .post<Categoria>('api/categoria', categoria)

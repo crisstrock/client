@@ -24,6 +24,10 @@ import { CategoriaComponent } from './categoria/categoria.component';
 //Bootstrap Modals
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { PresentacionComponent } from './presentacion/presentacion.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { ProductoListComponent } from './producto/producto-list/producto-list.component';
+import { ProductoItemComponent } from './producto/producto-list/producto-item/producto-item.component';
 
 //Routes
 const routes: Routes = [
@@ -33,6 +37,7 @@ const routes: Routes = [
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
   {path: 'categoria', component: CategoriaComponent},
   {path: 'producto', component: ProductoComponent},
+  {path: 'presentacion/:id', component: PresentacionComponent},
 ]
 
 @NgModule({
@@ -44,7 +49,11 @@ const routes: Routes = [
     ProfileComponent,
     ProductoComponent,
     CategoriaComponent,
-    PresentacionComponent
+    PresentacionComponent,
+    HeaderComponent,
+    FooterComponent,
+    ProductoListComponent,
+    ProductoItemComponent
   ],
   imports: [
     BrowserModule,

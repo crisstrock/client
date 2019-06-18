@@ -1,12 +1,8 @@
-<br>
-<form class="form" (submit)="add(categoriaNombre.value, categoriaDescripcion.value); categoriaNombre.value=''; categoriaDescripcion.value=''">
-	<div class="modal-header">
-		<h5 class="modal-title">Agregar una Categoria</h5>
-		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		  <span aria-hidden="true">&times;</span>
-		</button>
-	</div>
-	<div class="modal-body">
+<form (submit)="add(categoriaNombre.value, categoriaDescripcion.value); categoriaNombre.value=''; categoriaDescripcion.value=''">
+<div class="card-header bg-primary text-white">
+	<h4>Add new Categoria</h4>
+</div>
+<div class="card card-body">
 		<span id="form-output"></span>
 		<div class="form-group">
 			<label for="nombre">Ingresa el nombre de la categoria</label>
@@ -16,12 +12,16 @@
 			<label for="nombre">Ingresa la descripción de la categoria</label>
 			<input #categoriaDescripcion type="text" class="form-control" name="descripcion" id="descripcion">
 		</div>
+</div>
+<div class="card card-footer">
+	<div class="container">
+		<input type="submit" class="btn btn-info btn-lg" value="Agregar">
 	</div>
-	<div class="modal-footer">
-		<input type="submit" class="btn btn-info btn-lg btn-block" value="Agregar">
-		<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-	</div>
+</div>
 </form>
+
+<hr>
+<br>
 
 <table class="table">
 	<tr class="text-center">

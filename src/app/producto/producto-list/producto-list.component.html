@@ -1,0 +1,19 @@
+<div class="card card-header mt-4" *ngIf="productos.length == 0">
+  <h4>Productos not present !!!</h4>
+</div>
+<div class="container">
+  <table class="table table-stripped table-bordered">
+      <tr>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Categoria</th>
+          <th>Opciones</th>
+      </tr>
+    
+      <li *ngFor="let producto of productos">
+        <!--To pass the parameter use []-->
+        <app-producto-item [producto]="producto"></app-producto-item>
+      </li>
+    
+  </table>
+</div>
