@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-//Import the Producto model
+//Import the Producto model and Presentacion Model
 import { Producto } from './Producto';
+import { Presentacion } from '../presentacion/Presentacion';
 //Import the HttpClient to do request with differents methods
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -34,20 +35,6 @@ export class ProductoService {
   getProductos(): Observable<Producto[]>{
     return this.http.get<Producto[]>(this.server+'api/get_productos')
   }
-
-  //function to get one detail task
-  getPresentaciones(no): Observable<Producto>{
-    const presentaciones = {
-      id: no,
-      title: 'not set',
-      status: false,
-      date: new Date()
-    }
-    return this.http.post<Producto>(this.server+'api/get_presentacion', presentaciones)
-  }
-
-  //function to get all categorias
-  //getCategorias(): Observable<
 
   //function to delete a productos
   deleteProducto(no): Observable<Producto>{
@@ -88,7 +75,45 @@ export class ProductoService {
       categoria_id: null,
       user_id: null
     }
-    return this.http.post<Producto>(this.server+'api/getonetask', newProducto)
+    return this.http.post<Producto>(this.server+'api/getone_producto', newProducto)
+  }
+
+  //--------Section from Presentacion of Productos ----------------------------
+
+  //This function will add a new presentacion of some producto
+  addPresentacionProducto(nombre,cantidad,unidad_medida,precio,producto_id): Observable<Presentacion>{
+    const newPresentacion = {
+      nombre: nombre,
+      cantidad: cantidad,
+      unidad_medida: unidad_medida,
+      precio: precio,
+      producto_id: producto_id
+    }
+    return this.http.post<Presentacion>(this.server+'api/add_presentacion', newPresentacion)
+  }
+
+  editPresentacionProducto(id,nombre,cantidad,unidad,precio,p_id): Observable<Presentacion>{
+    const newPresentacion = {
+      id:id,
+      nombre: nombre,
+      cantidad: cantidad,
+      unidad_medida: unidad,
+      precio: precio,
+      producto_id: p_id
+    }
+    return this.http.post<any>(this.server+'api/edit_presentacion', newPresentacion)
+  }
+
+  deletePresentacionProducto(id): Observable<Presentacion>{
+    const newPresentacion = {
+      id:id,
+      nombre: '',
+      cantidad: '',
+      unidad_medida: '',
+      precio: '',
+      producto_id: ''
+    }
+    return this.http.post<Presentacion>(this.server+'api/delete_presentacion', newPresentacion)
   }
 
 }

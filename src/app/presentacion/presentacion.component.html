@@ -1,6 +1,95 @@
 <br>
-
-<button type="button" class="btn btn-primary btn-small" (click)="showModal()">Agregar nueva presentacion</button>
 <div class="container">
-	<table datatable [dtOptions]="dtOptions" class="row-border hover"></table>
+	<div class="row">
+		<div class="col">
+			<h4>Current Presentaciones of {{ producto_nombre }}</h4>
+		</div>
+		<div class="col">
+			<button type="button" class="btn btn-primary float-right btn-small" (click)="open(content)">Add new presentacion</button>
+		</div>
+	</div>
+	<hr>
+	<p>
+		<ngb-alert [type]="alert.type" (close)="close(alert)">{{ alert.message }}</ngb-alert>
+	</p>
+	<p>
+		<button type="button" class="btn btn-success" (click)="rerender()">
+		  Rerender
+		</button>
+	</p>
+	<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover"></table>
 </div>
+
+<!-- Add Modal -->
+<ng-template #content let-modal>
+        
+        <div class="modal-header">
+          <h4 class="modal-title">Add Presentación</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form (submit)="addPresentacion($event)">
+        <div class="modal-body">
+          <div class="form-group">
+			<input type="text" class="form-control" name="nombre" placeholder="Enter nombre of the presentacion" [(ngModel)]="nombre" [ngClass]="{'is-invalid' : nombre == '' && formSubmitted}"><!-- [(ngModel)]="title"  >-->
+			<div class="invalid-feedback">Nombre can't be blank!</div>
+          </div>
+          <div class="form-group">
+			<input type="text" class="form-control" name="cantidad" placeholder="Enter cantidad of the presentacion, exaple: 600" [(ngModel)]="cantidad" [ngClass]="{'is-invalid' : cantidad == '' && formSubmitted}"><!-- [(ngModel)]="title"  >-->
+			<div class="invalid-feedback">Cantidad can't be blank!</div>
+		  </div>
+		  <div class="form-group">
+				<input type="text" class="form-control" name="unidad_medida" placeholder="Enter unidad de medida of the presentacion, example: ML" [(ngModel)]="unidad_medida" [ngClass]="{'is-invalid' : unidad_medida == '' && formSubmitted}"><!-- [(ngModel)]="title"  >-->
+				<div class="invalid-feedback">Unidad de Medida can't be blank!</div>
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" name="precio" placeholder="Enter precio of the presentacion, example: 15.00" [(ngModel)]="precio" [ngClass]="{'is-invalid' : precio == '' && formSubmitted}"><!-- [(ngModel)]="title"  >-->
+				<div class="invalid-feedback">Precio can't be blank!</div>
+			</div>
+			<input [(ngModel)]="producto_id" name="producto_id" value="{{ producto_id }}" type="hidden">
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Add</button>
+          <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+        </div>
+    </form>
+    
+</ng-template>
+
+<!-- Edit Modal -->
+<ng-template #contentPr let-modal>
+        
+        <div class="modal-header">
+          <h4 class="modal-title">Edit Presentación</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form (submit)="editPresentacion($event,nombre_edit,cantidadEdit,unidadEdit,precioEdit,productoIdEdit)">
+        <div class="modal-body">
+          <div class="form-group">
+			<input #nombre_edit type="text" class="form-control" [value]="presentacion.nombre" [ngClass]="{'is-invalid' : nombre == '' && formSubmitted}"><!-- [(ngModel)]="title"  >-->
+			<div class="invalid-feedback">Nombre can't be blank!</div>
+          </div>
+          <div class="form-group">
+			<input #cantidadEdit type="text" class="form-control" value="{{ presentacion.cantidad }}" [ngClass]="{'is-invalid' : cantidad == '' && formSubmitted}"><!-- [(ngModel)]="title"  >-->
+			<div class="invalid-feedback">Cantidad can't be blank!</div>
+		  </div>
+		  <div class="form-group">
+				<input #unidadEdit type="text" class="form-control" value="{{ presentacion.unidad_medida }}" name="unidad_medida" [ngClass]="{'is-invalid' : unidad_medida == '' && formSubmitted}"><!-- [(ngModel)]="title"  >-->
+				<div class="invalid-feedback">Unidad de Medida can't be blank!</div>
+			</div>
+			<div class="form-group">
+				<input #precioEdit type="text" class="form-control" value="{{ presentacion.precio }}" name="precio" [ngClass]="{'is-invalid' : precio == '' && formSubmitted}"><!-- [(ngModel)]="title"  >-->
+				<div class="invalid-feedback">Precio can't be blank!</div>
+			</div>
+			<input #productoIdEdit name="producto_id" value="{{ producto_id }}" type="hidden">
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Add</button>
+          <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+        </div>
+    </form>
+    
+</ng-template>

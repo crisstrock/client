@@ -3,17 +3,11 @@
 </div>
 <div class="container">
   <table class="table table-stripped table-bordered">
-      <tr>
-          <th>Nombre</th>
-          <th>Descripción</th>
-          <th>Categoria</th>
-          <th>Opciones</th>
-      </tr>
-    
-      <li *ngFor="let producto of productos">
+    <ul class="list-group">
+      <li *ngFor="let producto of productos" class="list-group-item">
         <!--To pass the parameter use []-->
         <app-producto-item [producto]="producto"></app-producto-item>
       </li>
-    
+    </ul>
   </table>
 </div>

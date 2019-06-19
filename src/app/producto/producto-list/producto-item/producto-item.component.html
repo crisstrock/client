@@ -1,18 +1,17 @@
 
-<tr>
-  <td>{{ producto.nombre }}</td>
-  <td>{{ producto.descripcion }}</td>
-  <td *ngIf="producto.categoria_id == 0">Sin categoria</td>
-  <td *ngIf="producto.categoria_id != 0">{{ categoria.nombre }}</td>
-  <td>
-    <button class="btn btn-danger float-right ml-3" (click)="delete()">Delete</button>
-    <button class="btn btn-dark float-right ml-3" routerLink="/presentacion/{{ producto.id }}">Presentaciones</button>
-    <button class="btn btn-success float-right ml-3" (click)="openModalChange(contentChange)">Change</button>
-    <button class="btn btn-info float-right" (click)="open(content)">Edit</button>
-  </td>
-</tr>
+  <h4 class="text-primary">Nombre: {{ producto.nombre }}</h4>
+  <p class="text-primary">Descripción: {{ producto.descripcion }}</p>
+  <p class="text-primary" *ngIf="producto.categoria_id == 0">Categoria: Sin categoria</p>
+  <p class="text-primary" *ngIf="producto.categoria_id != 0">Categoria: {{ categoria.nombre }}</p>
+  <p class="text-primary">
+      <button class="btn btn-danger float-right ml-3" (click)="delete()">Delete</button>
+      <button class="btn btn-dark float-right ml-3" routerLink="/presentacion/{{ producto.id }}">Presentaciones</button>
+      <button class="btn btn-success float-right ml-3" (click)="openModalChange(contentChange)">Change</button>
+      <button class="btn btn-info float-right" (click)="open(content)">Edit</button>
+  </p>
+  
 
-<!-- Add Modal -->
+<!-- Edit Modal -->
 <ng-template #content let-modal>
         
         <div class="modal-header">

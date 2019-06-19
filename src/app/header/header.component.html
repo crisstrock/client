@@ -24,9 +24,6 @@
         <a routerLink="/producto" class="nav-link">Productos</a>
       </li>
       <li *ngIf="auth.isLoggedIn()" class="nav-item">
-        <a routerLink="/presentacion" class="nav-link">Presentación</a>
-      </li>
-      <li *ngIf="auth.isLoggedIn()" class="nav-item">
         <a routerLink="" (click)="auth.logout()" class="nav-link">Logout</a>
       </li>
     </ul>
